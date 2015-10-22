@@ -20,6 +20,9 @@
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
+    <!-- google maps javascript -->
+    <script src="//maps.googleapis.com/maps/api/js?key=AIzaSyB16sGmIekuGIvYOfNoW9T44377IU2d2Es&sensor=true"></script>
+
   </head>
 
 <body ng-app="client" ng-controller="TodoCtrl">
@@ -64,6 +67,8 @@
       <div class="padding">
         <button class="button button-block button-positive" ng-click="takePic()">Register</button>
       </div>
+
+      <div id="map"></div>
 
     </ion-content>
 

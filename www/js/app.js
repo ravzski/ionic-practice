@@ -21,6 +21,33 @@ angular.module('client', ['ionic'])
 
 .controller('TodoCtrl', function($scope, $ionicModal,$ionicSideMenuDelegate, $ionicPopup, $timeout) {
 
+    function initMap() {
+      var map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: -34.397, lng: 150.644},
+        zoom: 6
+      });
+      var infoWindow = new google.maps.InfoWindow({map: map});
+
+      // Try HTML5 geolocation.
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+
+          infoWindow.setPosition(pos);
+          infoWindow.setContent('Location found.');
+          map.setCenter(pos);
+        }, function() {
+          handleLocationError(true, infoWindow, map.getCenter());
+        });
+      } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+      }
+    }
+
   $scope.tae = function() {
      var alertPopup = $ionicPopup.alert({
        title: 'Don\'t eat that!',
@@ -62,4 +89,5 @@ angular.module('client', ['ionic'])
         ft.upload(myImg, encodeURI("https://example.com/posts/"), onUploadSuccess, onUploadFail, options);
     };
 
+  initMap();
 })
